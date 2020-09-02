@@ -25,7 +25,6 @@ public class PolicyHandler{
 
     @Autowired
     DeliverableRepository deliverableRepository;
-
     @Autowired
     BookRepository bookRepository;
 
@@ -36,7 +35,6 @@ public class PolicyHandler{
         if(ordered.isMe()){
 
             /*Deliberables 생성 가능 여부 확인. 주문양 >=재고 */
-            System.out.println("##### Deliberables Cheeck ");
             Optional<Book> bookOptional = bookRepository.findById(ordered.getBookId());
             Book book = bookOptional.get();
 
@@ -59,12 +57,12 @@ public class PolicyHandler{
 
             }
             else{
-                System.out.println("##### StockLacked : " + ordered.toJson());
+                System.out.println("##### Stock_Lacked : " + ordered.toJson());
                 Deliverable deliverable = new Deliverable();
                 deliverable.setOrderId(ordered.getOrderId());
                 deliverable.setQuantity(ordered.getQuantity());
                 deliverable.setBookId(ordered.getBookId());
-                deliverable.setStatus("StockLacked");
+                deliverable.setStatus("Stock_Lacked");
 
                 deliverableRepository.save(deliverable);
             }
