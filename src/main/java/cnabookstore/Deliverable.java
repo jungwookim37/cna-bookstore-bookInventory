@@ -10,7 +10,7 @@ public class Deliverable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private Long id;
+    private Long deliverableId;
     private Long orderId;
     private Long bookId;
     private Integer quantity;
@@ -23,14 +23,14 @@ public class Deliverable {
         deliveryPrepared.publishAfterCommit();
     }
 
-
-    public Long getId() {
-        return id;
+    public Long getDeliverableId() {
+        return deliverableId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setDeliverableId(Long deliverableId) {
+        this.deliverableId = deliverableId;
     }
+
     public Long getOrderId() {
         return orderId;
     }
@@ -59,8 +59,6 @@ public class Deliverable {
     public void setStatus(String status) {
         this.status = status;
     }
-
-
 
 
 }

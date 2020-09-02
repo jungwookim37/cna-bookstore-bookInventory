@@ -31,7 +31,6 @@ public class PolicyHandler{
             deliverable.setQuantity(ordered.getQuantity());
             deliverable.setBookId(ordered.getBookId());
             deliverable.setStatus("DeliveryPrepared");
-            System.out.println("##### listener PrepareDelivery : SAVE" );
 
             deliverableRepository.save(deliverable);
         }
