@@ -8,11 +8,11 @@ import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.transaction.Transactional;
 import java.util.Optional;
 
 
@@ -30,7 +30,7 @@ public class PolicyHandler{
     BookRepository bookRepository;
 
     @StreamListener(KafkaProcessor.INPUT)
-    @Transactional
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
     public void wheneverOrdered_PrepareDelivery(@Payload Ordered ordered){
 
         if(ordered.isMe()){
