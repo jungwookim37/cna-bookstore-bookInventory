@@ -8,11 +8,11 @@ import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.transaction.Transactional;
 import java.util.Optional;
 
 
@@ -25,18 +25,16 @@ public class PolicyHandler{
 
     @Autowired
     DeliverableRepository deliverableRepository;
-
     @Autowired
     BookRepository bookRepository;
 
     @StreamListener(KafkaProcessor.INPUT)
-    @Transactional
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
     public void wheneverOrdered_PrepareDelivery(@Payload Ordered ordered){
 
         if(ordered.isMe()){
 
             /*Deliberables 생성 가능 여부 확인. 주문양 >=재고 */
-            System.out.println("##### Deliberables Cheeck ");
             Optional<Book> bookOptional = bookRepository.findById(ordered.getBookId());
             Book book = bookOptional.get();
 
@@ -59,12 +57,12 @@ public class PolicyHandler{
 
             }
             else{
-                System.out.println("##### StockLacked : " + ordered.toJson());
+                System.out.println("##### Stock_Lacked : " + ordered.toJson());
                 Deliverable deliverable = new Deliverable();
                 deliverable.setOrderId(ordered.getOrderId());
                 deliverable.setQuantity(ordered.getQuantity());
                 deliverable.setBookId(ordered.getBookId());
-                deliverable.setStatus("StockLacked");
+                deliverable.setStatus("Stock_Lacked");
 
                 deliverableRepository.save(deliverable);
             }
