@@ -56,7 +56,7 @@ public class StockInputController {
         Integer totalQuantity = Integer.valueOf(book.getStock().intValue() + stockInput.getQuantity().intValue());
         System.out.println("################ total quantity " + totalQuantity.toString());
         DeliverableRepository deliverableRepository = BookInventoryApplication.applicationContext.getBean(DeliverableRepository.class);
-        Optional<List<Deliverable>> deliverablesOptional = deliverableRepository.findByBookIdAndStatusOrderByOrderIdAsc(book.getBookId(), "StockLacked");
+        Optional<List<Deliverable>> deliverablesOptional = deliverableRepository.findByBookIdAndStatusOrderByOrderIdAsc(book.getBookId(), "Stock_Lacked");
         if (deliverablesOptional.isPresent()) {
             List<Deliverable> deliverables = deliverablesOptional.get();
             for (Deliverable deliverable : deliverables) {

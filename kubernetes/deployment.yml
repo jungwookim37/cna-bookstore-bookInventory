@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: bookInventory
+  name: bookinventory
   labels:
-    app: bookInventory
+    app: bookinventory
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: bookInventory
+      app: bookinventory
   template:
     metadata:
       labels:
-        app: bookInventory
+        app: bookinventory
     spec:
       containers:
-        - name: bookInventory
-          image: username/bookInventory:latest
+        - name: bookinventory
+          image: acrcna.azurecr.io/cna-bookstore-bookinventory:v1
           ports:
             - containerPort: 8080
           readinessProbe:
