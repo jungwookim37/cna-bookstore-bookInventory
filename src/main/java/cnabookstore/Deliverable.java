@@ -20,13 +20,13 @@ public class Deliverable {
     private String status;
 
     @PostPersist
-    public void onPostPersist(){
-        DeliveryPrepared deliveryPrepared = new DeliveryPrepared();
-        BeanUtils.copyProperties(this, deliveryPrepared);
-        if(this.getStatus() == "Delivery_Prepared"){
+    @PostUpdate
+    public void onPostPersist() {
+        if (getStatus() == "Delivery_Prepared") {
+            DeliveryPrepared deliveryPrepared = new DeliveryPrepared();
+            BeanUtils.copyProperties(this, deliveryPrepared);
             deliveryPrepared.publishAfterCommit();
         }
-
     }
 
     public Long getDeliverableId() {
