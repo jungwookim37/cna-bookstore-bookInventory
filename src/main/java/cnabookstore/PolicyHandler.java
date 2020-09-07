@@ -74,7 +74,7 @@ public class PolicyHandler{
 
         if(orderCanceled.isMe()){
             System.out.println("##### listener DeleteDeliverable : " + orderCanceled.toJson());
-            Optional<Deliverable> deliverableOptional = deliverableRepository.findById(orderCanceled.getOrderId());
+            Optional<Deliverable> deliverableOptional = deliverableRepository.findByOrderId(orderCanceled.getOrderId());
             Deliverable deliverable = deliverableOptional.get();
             deliverable.setStatus("DeliveryCanceled");
 
