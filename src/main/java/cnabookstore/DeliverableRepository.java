@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface DeliverableRepository extends PagingAndSortingRepository<Deliverable, Long>{
 
     Optional<List<Deliverable>> findByBookIdAndStatusOrderByOrderIdAsc(Long bookId, String stockLacked);
+    Optional<Deliverable> findByOrderId(Long orderId);
 }
