@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: bookinventory
-          image: acrcna.azurecr.io/cna-bookstore-bookinventory:v1
+          image: cnaacr.azurecr.io/cna-bookstore-bookinventory:latest
           ports:
             - containerPort: 8080
           readinessProbe:
