@@ -62,3 +62,7 @@ spring:
         event-out:
           destination: cnabookstore
           contentType: application/json
+logging:
+  level:
+    org.hibernate.type: trace
+    org.springframework.cloud: debug
