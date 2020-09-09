@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: bookinventory
-          image: jwkimacr.azurecr.io/cna-bookstore-bookinventory:latest
+          image: jwkimacr.azurecr.io/bookinventory:latest
           ports:
             - containerPort: 8080
           resources:
